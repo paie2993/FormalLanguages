@@ -1,0 +1,38 @@
+Alphabet :
+a.	Upper- and lowercase letters of the English alphabet: A-Z and a-z
+b.	Decimal digits: 0-9
+c.	Underline character: “_”
+
+Lexic:
+a.	Special symbols:
+	Operators:           +    -    *    /    %    =    <    <=    >    >=    ==     &&     ||    ! 
+	Separators:          \s    \t    \n     :    (     )     [    ]    {    }
+	Reserved words:      Integer    Character     String     Boolean      if    else    while     for    read    write    val    to
+
+b.	Identifiers:
+digit      = “0” | “1” | “2” | “3” | “4” | “5” | “6” | “7” | “8” | “9”
+letter     = “a” | “b” | ... | “z” | “A” | “B” | ... | “Z”
+underscore = “_” 
+identifier =  [underscore] letter { letter | digit }
+
+c.	Constants :
+
+a.	Integer :
+digitSequence = digit {digit}
+nonZeroDigit  = “1” | “2” | ... | “9”
+zeroDigit     = “0”
+sign          = “+” | “-”
+integer       = zeroDigit | [sign] nonZeroDigit { digit }
+
+b.	Character :
+operatorChar   = ”+” | ”-” | ”*” | ”/” | ”%” | ”=” | ”<” | ”>” | “!” | “&” | “|” 
+separatorChar  = “\s”  |  “\t”  |  “\n”   |  “:”  |  “(”  |  “)”  |  ”[”  |  “]”  |  ”{”  |  ”}” 
+char           = letter | digit | underscore | operatorChar | separatorChar  | “;” | “\”  | “ ’ ” | “ “ ”
+character      = ‘char’
+
+
+c.	String:
+string  = “ “ ” {char} “ “ ”
+
+d.	Boolean:
+boolean = “true” | “false”
