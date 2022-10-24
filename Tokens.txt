@@ -1,11 +1,39 @@
-Separators :    \s \t \n  : ( ) [ ] { }
+\s 
+\t 
+\n  
+: 
+( 
+) 
+[ 
+] 
+{ 
+}
 
-Operators:       + - * / % = < <= > >= == && || ! 
++ 
+- 
+* 
+/ 
+% 
+= 
+< 
+<= 
+> 
+>= 
+==
+!=
+&& 
+|| 
+! 
 
-Reserved words:  Integer Character String Boolean if else while for read write val to
-
-	
-
-
-
-
+Integer 
+Character 
+String 
+Boolean 
+if 
+else 
+while 
+for 
+read 
+write 
+val 
+to
