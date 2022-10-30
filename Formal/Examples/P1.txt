@@ -1,0 +1,12 @@
+val a: Integer
+read(a)
+
+if (a < 2) {
+	write(“false”)
+} else {
+	for (2 to a/2)
+		if (a % i == 0) {
+			write(“false”)
+		}
+	write(“true”)
+}

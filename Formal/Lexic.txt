@@ -6,7 +6,7 @@ d.      The characters: + - * / % = < > ! & |    ? , . ' " \       \s \t \n : ( 
 
 Lexic:
 a.	Special symbols:
-	Operators:           +    -    *    /    %    =    <    <=    >    >=    ==     &&     ||    ! 
+	Operators:           +    -    *    /    %    =    <    <=    >    >=    ==   !=    &&     ||    ! 
 	Separators:          \s    \t    \n     :    (     )     [    ]    {    }
 	Reserved words:      Integer    Character     String     Boolean      if    else    while     for    read    write    val    to
 

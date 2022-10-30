@@ -1,0 +1,16 @@
+P3. Compute the sum of n numbers
+
+val n: Int
+read(n)
+
+if (n <= 0)
+	write(“Can’t be done”)
+else {
+	val arr: Int[n]
+	for (0 to n - 1)
+		read(arr[i])
+			val sum: Int = 0
+	for (0 to n - 1)
+		sum = sum + arr[j]
+	write(sum)
+}
