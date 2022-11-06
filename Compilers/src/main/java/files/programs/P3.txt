@@ -1,0 +1,14 @@
+val n: Integer
+read(n)
+
+if (n <= 0)
+	write("Can't be done")
+else {
+	val arr: Integer[n]
+	for (0 to n - 1)
+		read(arr[i])
+			val sum: Integer = 0
+	for (0 to n - 1)
+		sum = sum + arr[j]
+	write(sum)
+}
