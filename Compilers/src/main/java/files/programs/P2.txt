@@ -1,0 +1,17 @@
+val a: Integer
+val b: Integer
+
+read(a)
+read(b)
+
+if (a < 0)
+	a = 0-a
+if (b < 0)
+	b = 0-b
+
+while (a != b)
+	if (a > b)
+		a = a - b
+	else
+		b = b - a
+write(a)

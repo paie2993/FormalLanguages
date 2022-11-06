@@ -1,0 +1,45 @@
+Syntax :
+
+program          = mixedStatement | compoundStatement
+newlineSeparator = “\n” 
+
+factor                 = identifier | constant | “(” arithmetichExpression “)” | arrayAccessExpression
+term                   = factor [ ( “*” |”/” | "%" ) term ]
+arithmeticExpression   = term [ ( “+” | “-” ) arithmeticExpression ]
+
+negation            =  “!”
+booleanOperator     =  “&&”  |  “||”
+booleanTerm         =  [ negation ] ( identifier | booleanConstant | “(” booleanExpression “)” )
+relationalOperator  = “<” | “<=” | “==” | “>” | “>=” | "!="
+booleanExpression   =  booleanTerm [ booleanOperator booleanExpression ] | arithmeticExpression relationalOperator arithmeticExpression
+
+expression  = arithmeticExpression | booleanExpression | 
+
+readArgument   = identifier | arrayAccessExpression
+writeArgument  = expression
+ioStatement    = “read” “(” readArgument “)” | “write” “(” ( writeArgument ) “)” 
+
+
+primitiveType        = “Integer” | “Character” | “String” | “Boolean”
+arrayType            = primitiveType”[” arithmeticExpression “]”
+type                 = primitiveType | arrayType
+declarationStatement = “val” identifier “:” type
+
+arrayAccessExpression= identifier"[" arithmeticExpression "]"
+
+assignment           = “=” expression
+assignmentStatement  =  identifier assignment
+
+initializationShorthandStatement = declarationStatement assignment
+
+
+ifStatement          =  “if” “(” booleanExpression “)” statement  [ “else” statement  ] 
+whileStatement       =  “while” “(” booleanExpression “)” statement
+forStatement         =  “for” “(” expression “to” expression “)” statement
+controlFlowStatement =  ifStatement | whileStatement | forStatement
+
+simpleStatement          = declarationStatement | assignmentStatement | initializationShorthandStatement | constrolFlowStatement | ioStatement
+simpleStatementSequence  = simpleStatement { newlineSeparator simpleStatement }    /* doesn’t end with newline */
+compoundStatement        = “{” mixedStatement { newlineSeparator mixedStatement } “}”  /* doesn’t end with newline /*
+mixedStatement           = simpleStatemenentSequence | compunedStatement         /*  doesn’t end with newline */
+statement                = simpleStatement | compundStatement

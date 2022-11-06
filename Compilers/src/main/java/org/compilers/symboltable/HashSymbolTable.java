@@ -1,8 +1,8 @@
 package org.compilers.symboltable;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Optional;
+import org.compilers.pair.Pair;
+
+import java.util.*;
 
 public final class HashSymbolTable implements SymbolTable {
 
@@ -20,7 +20,7 @@ public final class HashSymbolTable implements SymbolTable {
         Objects.requireNonNull(id);
         var pairWithId = findPairWithId(id);
         if (pairWithId.isPresent()) {
-            return pairWithId.get().index;
+            return pairWithId.get().index();
         } else {
             resizeHashTableIfNeeded();
             return registerId(id);
@@ -28,12 +28,12 @@ public final class HashSymbolTable implements SymbolTable {
     }
 
     static int tableHashCode(String id, int capacity) {
-        return id.hashCode() % capacity;
+        return Math.abs(id.hashCode() % capacity);
     }
 
     Optional<Pair<Integer, String>> findPairWithId(String id) {
         var list = findIdList(id);
-        return list.stream().filter(pair -> pair.id.equals(id)).findFirst();
+        return list.stream().filter(pair -> pair.id().equals(id)).findFirst();
     }
 
     LinkedList<Pair<Integer, String>> findIdList(String id) {
@@ -67,15 +67,11 @@ public final class HashSymbolTable implements SymbolTable {
         var newHashTable = initializeHashTable(currentCapacity);
         for (var list : hashTable) {
             for (var pair : list.list) {
-                int idHashCode = tableHashCode(pair.id, currentCapacity);
+                int idHashCode = tableHashCode(pair.id(), currentCapacity);
                 newHashTable[idHashCode].list.add(pair);
             }
         }
         return newHashTable;
-    }
-
-
-    static final record Pair<I, V>(I index, V id) {
     }
 
     private static final record LinkedListWrapper(LinkedList<Pair<Integer, String>> list) {
@@ -87,5 +83,26 @@ public final class HashSymbolTable implements SymbolTable {
             list[i] = new LinkedListWrapper(new LinkedList<>());
         }
         return list;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        final String format = "\t%-10s\t|\t%-20s\t\n";
+        builder.append(String.format(format, "id", "index"));
+        builder.append("----------------------------------------------\n");
+        final List<Pair<Integer, String>> orderedPairs = prepareForPrint();
+        orderedPairs.forEach(pair ->
+                builder.append(String.format(format, pair.index(), pair.id()))
+        );
+        return builder.toString();
+    }
+
+    private List<Pair<Integer, String>> prepareForPrint() {
+        final Set<Pair<Integer, String>> orderedSet = new TreeSet<>();
+        for (LinkedListWrapper wrapper : hashTable) {
+            orderedSet.addAll(wrapper.list);
+        }
+        return orderedSet.stream().toList();
     }
 }
