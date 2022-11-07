@@ -1,8 +1,10 @@
-	id        	|	index               	
+	index     	|	token symbol        	
 ----------------------------------------------
-	0         	|	a                   	
-	1         	|	2                   	
-	2         	|	"false"             	
-	3         	|	i                   	
-	4         	|	0                   	
-	5         	|	"true"              	
+	0         	|	n                   	
+	1         	|	0                   	
+	2         	|	"Can't be done"     	
+	3         	|	arr                 	
+	4         	|	1                   	
+	5         	|	i                   	
+	6         	|	sum                 	
+	7         	|	j                   	

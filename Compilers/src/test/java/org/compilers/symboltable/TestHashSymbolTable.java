@@ -81,8 +81,8 @@ class TestHashSymbolTable {
         optional = st.findPairWithId("a");
         Assertions.assertTrue(optional.isPresent());
 
-        Assertions.assertEquals("a", optional.get().id());
-        Assertions.assertEquals(0, optional.get().index());
+        Assertions.assertEquals("a", optional.get().second());
+        Assertions.assertEquals(0, optional.get().first());
     }
 
     @Test

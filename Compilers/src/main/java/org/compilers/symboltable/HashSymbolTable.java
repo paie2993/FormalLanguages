@@ -20,7 +20,7 @@ public final class HashSymbolTable implements SymbolTable {
         Objects.requireNonNull(id);
         var pairWithId = findPairWithId(id);
         if (pairWithId.isPresent()) {
-            return pairWithId.get().index();
+            return pairWithId.get().first();
         } else {
             resizeHashTableIfNeeded();
             return registerId(id);
@@ -33,7 +33,7 @@ public final class HashSymbolTable implements SymbolTable {
 
     Optional<Pair<Integer, String>> findPairWithId(String id) {
         var list = findIdList(id);
-        return list.stream().filter(pair -> pair.id().equals(id)).findFirst();
+        return list.stream().filter(pair -> pair.second().equals(id)).findFirst();
     }
 
     LinkedList<Pair<Integer, String>> findIdList(String id) {
@@ -67,7 +67,7 @@ public final class HashSymbolTable implements SymbolTable {
         var newHashTable = initializeHashTable(currentCapacity);
         for (var list : hashTable) {
             for (var pair : list.list) {
-                int idHashCode = tableHashCode(pair.id(), currentCapacity);
+                int idHashCode = tableHashCode(pair.second(), currentCapacity);
                 newHashTable[idHashCode].list.add(pair);
             }
         }
@@ -89,12 +89,10 @@ public final class HashSymbolTable implements SymbolTable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         final String format = "\t%-10s\t|\t%-20s\t\n";
-        builder.append(String.format(format, "id", "index"));
+        builder.append(String.format(format, "index", "token symbol"));
         builder.append("----------------------------------------------\n");
         final List<Pair<Integer, String>> orderedPairs = prepareForPrint();
-        orderedPairs.forEach(pair ->
-                builder.append(String.format(format, pair.index(), pair.id()))
-        );
+        orderedPairs.forEach(pair -> builder.append(String.format(format, pair.first(), pair.second())));
         return builder.toString();
     }
 

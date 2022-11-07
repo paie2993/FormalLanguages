@@ -1,9 +1,12 @@
 package org.compilers.pair;
 
-public final record Pair<I extends Comparable<I>, V>(I index, V id) implements Comparable<Pair<I, V>> {
+public record Pair<I extends Comparable<I>, V extends Comparable<V>>(
+        I first,
+        V second
+) implements Comparable<Pair<I, V>> {
 
     @Override
     public int compareTo(Pair<I, V> o) {
-        return this.index.compareTo(o.index);
+        return this.first.compareTo(o.first);
     }
 }

@@ -7,21 +7,19 @@ import java.util.List;
 
 public final class ProgramInternalForm {
 
-    private final List<Pair<Integer, String>> pif = new ArrayList<>();
+    private final List<Pair<String, Integer>> pif = new ArrayList<>();
 
-    public void add(final int index, final String token) {
-        pif.add(new Pair<>(index, token));
+    public void add(final String token, final int index) {
+        pif.add(new Pair<>(token, index));
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        final String format = "\t%-10s\t|\t%-20s\t\n";
-        builder.append(String.format(format, "id", "index"));
+        final String format = "\t%-20s\t|\t%-10s\t\n";
+        builder.append(String.format(format, "token", "symbol table index"));
         builder.append("-----------------------------------------------\n");
-        pif.forEach(pair ->
-                builder.append(String.format(format, pair.index(), pair.id()))
-        );
+        pif.forEach(pair -> builder.append(String.format(format, pair.first(), pair.second())));
         return builder.toString();
     }
 }

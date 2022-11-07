@@ -12,14 +12,14 @@ final record Bundle(SymbolTable symbolTable, ProgramInternalForm programInternal
     void add(final String token) {
         if (Analyser.isSeparator(token) || Analyser.isOperator(token) || Analyser.isKeyword(token)) {
             if (!token.matches(Rules.unregistrableSeparatorsRegex)) {
-                programInternalForm.add(-1, token);
+                programInternalForm.add(token, -1);
             }
         } else if (Analyser.isConstant(token)) {
             int symbolTableIndex = symbolTable.put(token);
-            programInternalForm.add(symbolTableIndex, "constant");
+            programInternalForm.add("constant", symbolTableIndex);
         } else if (Analyser.isIdentifier(token)) {
             int symbolTableIndex = symbolTable.put(token);
-            programInternalForm.add(symbolTableIndex, "identifier");
+            programInternalForm.add("identifier", symbolTableIndex);
         } else {
             throw new RuntimeException("Token could not be classified: " + token);
         }
