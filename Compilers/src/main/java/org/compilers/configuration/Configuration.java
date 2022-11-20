@@ -7,7 +7,7 @@ public final class Configuration {
 
     public static final String TOKENS_FILE = "src/main/java/org/compilers/configuration/static/Tokens.txt";
 
-    public static final String PROGRAM_INPUT_FILE = "src/main/java/org/compilers/scanner/files/programs/P1.txt";
+    public static final String PROGRAM_INPUT_FILE = "src/main/java/org/compilers/scanner/files/programs/P2.txt";
     public static final String SYMBOL_TABLE_OUTPUT_FILE = "src/main/java/org/compilers/scanner/files/output/symbol.txt";
     public static final String PIF_OUTPUT_FILE = "src/main/java/org/compilers/scanner/files/output/internal.txt";
 
