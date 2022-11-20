@@ -1,7 +1,7 @@
 package org.compilers.automaton_io.automaton_reader;
 
 import org.compilers.finite_automaton.FiniteAutomaton;
-import org.compilers.finite_automaton.implementation.FiniteAutomatonImpl;
+import org.compilers.finite_automaton.implementation.DeterministicFiniteAutomatonImpl;
 import org.compilers.finite_automaton.transitions.Transition;
 import org.compilers.finite_automaton.vocabulary.alphabet.Symbol;
 import org.compilers.finite_automaton.vocabulary.alphabet.SymbolImpl;
@@ -9,66 +9,61 @@ import org.compilers.finite_automaton.vocabulary.state.State;
 import org.compilers.finite_automaton.vocabulary.state.StateImpl;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public final class FiniteAutomatonReaderImpl implements FiniteAutomatonReader {
+public final class DeterministicFiniteAutomatonReaderImpl implements FiniteAutomatonReader {
 
-    private FiniteAutomatonReaderImpl() {
+    // singleton implementation ...
+    private DeterministicFiniteAutomatonReaderImpl() {
     }
 
     private static final class LazyHolder {
-        private static final FiniteAutomatonReaderImpl instance = new FiniteAutomatonReaderImpl();
+        private static final DeterministicFiniteAutomatonReaderImpl instance = new DeterministicFiniteAutomatonReaderImpl();
     }
 
     public static FiniteAutomatonReader instance() {
         return LazyHolder.instance;
     }
+    // ... ends here
 
 
-    private static final class VocabsRules {
-        private static final String rule = "[a-zA-Z0-9]+";
-    }
-
-    private static final class TransitionRules {
-        private static final String prefix = "d\\(";
-        private static final String firstSeparator = ", ";
-        private static final String secondSeparator = "\\) = ";
-    }
-
-    private static final String transitionRule = buildTransitionRule();
-
-    private static final Pattern transitionPattern = Pattern.compile(transitionRule);
+    private static final Pattern transitionPattern = Pattern.compile(RegexRules.TransitionRules.transitionRule);
 
 
-    public FiniteAutomaton read(final String fileName) throws IOException {
+    public FiniteAutomaton read(final String fileName, final String stop) throws IOException {
         try (final BufferedReader reader = openReader(fileName)) {
-            final Set<State> states = readStates(reader);
-            final Set<Symbol> alphabet = readAlphabet(reader);
-            final Set<Transition> transitions = readTransitions(reader);
-            final State initialState = readInitialState(reader);
-            final Set<State> finalStates = readStates(reader);
-            return new FiniteAutomatonImpl(states, alphabet, transitions, initialState, finalStates);
+            final Set<State> states = readStates(reader, stop);
+            final Set<Symbol> alphabet = readAlphabet(reader, stop);
+            final Set<Transition> transitions = readTransitions(reader, stop);
+            final State initialState = readInitialState(reader, stop);
+            final Set<State> finalStates = readStates(reader, stop);
+            return DeterministicFiniteAutomatonImpl.of(states, alphabet, transitions, initialState, finalStates);
         }
     }
 
+    private static Collection<String> readBatch(final BufferedReader reader, final String stop) throws IOException {
+        final Collection<String> batch = new LinkedList<>();
 
-    // define the rule for transitions
-    private static String buildTransitionRule() {
-        return "^" +
-                TransitionRules.prefix +
-                VocabsRules.rule +
-                TransitionRules.firstSeparator +
-                VocabsRules.rule +
-                TransitionRules.secondSeparator +
-                VocabsRules.rule +
-                "$";
+        String element = readElement(reader);
+        while (!stop.equals(element)) {
+            batch.add(element);
+            element = readElement(reader);
+        }
+
+        return batch;
     }
 
-    // read the various elements of a finite automaton
-    private static Set<State> readStates(final BufferedReader reader) throws IOException {
+    private static Set<State> buildStates(final Collection<String> batch) {
+        return batch.stream().map(StateImpl::new).collect(Collectors.toSet());
+    }
+
+    /**
+     * reads the set of states
+     */
+    private static Set<State> readStates(final BufferedReader reader, final String stop) throws IOException {
         final Set<State> states = new HashSet<>();
 
         String element = readElement(reader);
@@ -116,7 +111,26 @@ public final class FiniteAutomatonReaderImpl implements FiniteAutomatonReader {
     // processing transitions
     private static Transition buildTransitionFromString(final String string) {
         final String[] tokens = extractTransitionTokens(string);
-        return Transition.of(tokens[0], tokens[1], tokens[2]);
+
+        final String resultStatesString = tokens[2];
+        final String[] resultStatesTokens = extractResultStatesTokens(resultStatesString);
+        final Set<String> resultStates = arrayToSet(resultStatesTokens);
+
+        return Transition.of(tokens[0], tokens[1], resultStates);
+    }
+
+    private static String[] extractTransitionTokens(final String string) {
+        assertTransitionSpecification(string);
+        final String trimmedTransition = string.substring(2, string.length() - 2);
+        return trimmedTransition.split(", |\\) = \\{ ");
+    }
+
+    private static String[] extractResultStatesTokens(final String string) {
+        return string.split(RegexRules.TransitionRules.resultStatesSeparator);
+    }
+
+    private static <T> Set<T> arrayToSet(final T[] array) {
+        return Arrays.stream(array).collect(Collectors.toUnmodifiableSet());
     }
 
     private static void assertTransitionSpecification(final String transition) {
@@ -124,12 +138,6 @@ public final class FiniteAutomatonReaderImpl implements FiniteAutomatonReader {
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Illegal transition specification: " + transition);
         }
-    }
-
-    private static String[] extractTransitionTokens(final String string) {
-        assertTransitionSpecification(string);
-        final String processedTransition = string.substring(2);
-        return processedTransition.split(", |\\) = ");
     }
 
     // general use functions for input from file

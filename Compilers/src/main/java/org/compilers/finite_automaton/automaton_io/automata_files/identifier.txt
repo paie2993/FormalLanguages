@@ -1,0 +1,240 @@
+A
+B
+C
+
+_
+a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+P
+Q
+R
+S
+T
+U
+V
+W
+X
+Y
+Z
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+d(A, _) = { C }
+d(A, a) = { B }
+d(A, b) = { B }
+d(A, c) = { B }
+d(A, d) = { B }
+d(A, e) = { B }
+d(A, f) = { B }
+d(A, g) = { B }
+d(A, h) = { B }
+d(A, i) = { B }
+d(A, j) = { B }
+d(A, k) = { B }
+d(A, l) = { B }
+d(A, m) = { B }
+d(A, n) = { B }
+d(A, o) = { B }
+d(A, p) = { B }
+d(A, q) = { B }
+d(A, r) = { B }
+d(A, s) = { B }
+d(A, t) = { B }
+d(A, u) = { B }
+d(A, v) = { B }
+d(A, w) = { B }
+d(A, x) = { B }
+d(A, y) = { B }
+d(A, z) = { B }
+d(A, A) = { B }
+d(A, B) = { B }
+d(A, C) = { B }
+d(A, D) = { B }
+d(A, E) = { B }
+d(A, F) = { B }
+d(A, G) = { B }
+d(A, H) = { B }
+d(A, I) = { B }
+d(A, J) = { B }
+d(A, K) = { B }
+d(A, L) = { B }
+d(A, M) = { B }
+d(A, N) = { B }
+d(A, O) = { B }
+d(A, P) = { B }
+d(A, Q) = { B }
+d(A, R) = { B }
+d(A, S) = { B }
+d(A, T) = { B }
+d(A, U) = { B }
+d(A, V) = { B }
+d(A, W) = { B }
+d(A, X) = { B }
+d(A, Y) = { B }
+d(A, Z) = { B }
+d(C, a) = { B }
+d(C, b) = { B }
+d(C, c) = { B }
+d(C, d) = { B }
+d(C, e) = { B }
+d(C, f) = { B }
+d(C, g) = { B }
+d(C, h) = { B }
+d(C, i) = { B }
+d(C, j) = { B }
+d(C, k) = { B }
+d(C, l) = { B }
+d(C, m) = { B }
+d(C, n) = { B }
+d(C, o) = { B }
+d(C, p) = { B }
+d(C, q) = { B }
+d(C, r) = { B }
+d(C, s) = { B }
+d(C, t) = { B }
+d(C, u) = { B }
+d(C, v) = { B }
+d(C, w) = { B }
+d(C, x) = { B }
+d(C, y) = { B }
+d(C, z) = { B }
+d(C, A) = { B }
+d(C, B) = { B }
+d(C, C) = { B }
+d(C, D) = { B }
+d(C, E) = { B }
+d(C, F) = { B }
+d(C, G) = { B }
+d(C, H) = { B }
+d(C, I) = { B }
+d(C, J) = { B }
+d(C, K) = { B }
+d(C, L) = { B }
+d(C, M) = { B }
+d(C, N) = { B }
+d(C, O) = { B }
+d(C, P) = { B }
+d(C, Q) = { B }
+d(C, R) = { B }
+d(C, S) = { B }
+d(C, T) = { B }
+d(C, U) = { B }
+d(C, V) = { B }
+d(C, W) = { B }
+d(C, X) = { B }
+d(C, Y) = { B }
+d(C, Z) = { B }
+d(B, 0) = { B }
+d(B, 1) = { B }
+d(B, 2) = { B }
+d(B, 3) = { B }
+d(B, 4) = { B }
+d(B, 5) = { B }
+d(B, 6) = { B }
+d(B, 7) = { B }
+d(B, 8) = { B }
+d(B, 9) = { B }
+d(B, a) = { B }
+d(B, b) = { B }
+d(B, c) = { B }
+d(B, d) = { B }
+d(B, e) = { B }
+d(B, f) = { B }
+d(B, g) = { B }
+d(B, h) = { B }
+d(B, i) = { B }
+d(B, j) = { B }
+d(B, k) = { B }
+d(B, l) = { B }
+d(B, m) = { B }
+d(B, n) = { B }
+d(B, o) = { B }
+d(B, p) = { B }
+d(B, q) = { B }
+d(B, r) = { B }
+d(B, s) = { B }
+d(B, t) = { B }
+d(B, u) = { B }
+d(B, v) = { B }
+d(B, w) = { B }
+d(B, x) = { B }
+d(B, y) = { B }
+d(B, z) = { B }
+d(B, A) = { B }
+d(B, B) = { B }
+d(B, C) = { B }
+d(B, D) = { B }
+d(B, E) = { B }
+d(B, F) = { B }
+d(B, G) = { B }
+d(B, H) = { B }
+d(B, I) = { B }
+d(B, J) = { B }
+d(B, K) = { B }
+d(B, L) = { B }
+d(B, M) = { B }
+d(B, N) = { B }
+d(B, O) = { B }
+d(B, P) = { B }
+d(B, Q) = { B }
+d(B, R) = { B }
+d(B, S) = { B }
+d(B, T) = { B }
+d(B, U) = { B }
+d(B, V) = { B }
+d(B, W) = { B }
+d(B, X) = { B }
+d(B, Y) = { B }
+d(B, Z) = { B }
+
+A
+
+B
+
