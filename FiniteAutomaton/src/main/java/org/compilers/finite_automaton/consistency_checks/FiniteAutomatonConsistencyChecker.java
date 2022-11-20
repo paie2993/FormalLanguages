@@ -32,6 +32,32 @@ public abstract class FiniteAutomatonConsistencyChecker {
     }
 
     /**
+     * checks that the input state of the transition is in the set of states
+     */
+    protected final void assertTransitionStateConsistency(
+            final Set<State> states,
+            final Transition transition
+    ) {
+        final State state = transition.state();
+        if (!states.contains(state)) {
+            throw new IllegalArgumentException("State of transition not in set of states: " + state.representation());
+        }
+    }
+
+    /**
+     * checks that the symbol of the transition is in the alphabet
+     */
+    protected final void assertTransitionSymbolConsistency(
+            final Set<Symbol> alphabet,
+            final Transition transition
+    ) {
+        final Symbol symbol = transition.symbol();
+        if (!alphabet.contains(symbol)) {
+            throw new IllegalArgumentException("Symbol of transition not in alphabet: " + symbol.representation());
+        }
+    }
+
+    /**
      * check if the transition rules use states and symbols that appear in the set of states, respectively in the alphabet
      */
     private void assertTransitionsConsistency(
@@ -43,7 +69,6 @@ public abstract class FiniteAutomatonConsistencyChecker {
             assertTransitionConsistency(states, alphabet, transition);
         }
     }
-
 
     /**
      * check if the initial state is in the set of states
