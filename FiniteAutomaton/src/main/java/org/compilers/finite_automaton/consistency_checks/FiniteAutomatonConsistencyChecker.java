@@ -15,7 +15,10 @@ public abstract class FiniteAutomatonConsistencyChecker {
             final Transition transition
     );
 
-
+    /**
+     * check that the set of states and the alphabet are in accordance with the transition rules, the initial state and
+     * the final states
+     */
     public final void assertConsistency(
             final Set<State> states,
             final Set<Symbol> alphabet,
@@ -28,7 +31,9 @@ public abstract class FiniteAutomatonConsistencyChecker {
         assertFinalStatesConsistency(states, finalStates);
     }
 
-    // transitions
+    /**
+     * check if the transition rules use states and symbols that appear in the set of states, respectively in the alphabet
+     */
     private void assertTransitionsConsistency(
             final Set<State> states,
             final Set<Symbol> alphabet,
@@ -40,7 +45,9 @@ public abstract class FiniteAutomatonConsistencyChecker {
     }
 
 
-    // initial state consistency
+    /**
+     * check if the initial state is in the set of states
+     */
     private static void assertInitialStateConsistency(
             final Set<State> states,
             final State initialState
@@ -50,7 +57,10 @@ public abstract class FiniteAutomatonConsistencyChecker {
         }
     }
 
-    // final states consistency
+
+    /**
+     * check if all the final states appear in the set of states
+     */
     private static void assertFinalStatesConsistency(
             final Set<State> states,
             final Set<State> finalStates
@@ -60,6 +70,9 @@ public abstract class FiniteAutomatonConsistencyChecker {
         }
     }
 
+    /**
+     * check if one of the final states is in the set of states
+     */
     private static void assertFinalStateConsistency(
             final Set<State> states,
             final State finalState
