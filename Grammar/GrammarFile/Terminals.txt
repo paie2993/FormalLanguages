@@ -1,0 +1,1 @@
+\n;(;);*;/;%;+;-;!;&&;||;<;<=;==;>;>=;!=;read;write;[;];val;:;=;if;else;while;for;to;{;};Integer;Character;Boolean;String
